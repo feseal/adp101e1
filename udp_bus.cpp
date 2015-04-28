@@ -9,9 +9,8 @@
 #include "udp_bus.hpp"
 #include "spell.hpp"
 
-namespace insys { namespace bus {
+namespace brd { namespace bus {
 
-/*http://www.boost.org/doc/libs/1_52_0/doc/html/boost_asio/example/timeouts/blocking_udp_client.cpp*/
 struct udp_bus::bus_impl {
     typedef boost::asio::io_service io_service;
     typedef boost::asio::deadline_timer deadline_timer;
@@ -30,7 +29,8 @@ struct udp_bus::bus_impl {
         , timeout_(timeout)
         , deadline_(io_service_) {
         udp::resolver resolver(io_service_);
-        udp::resolver::query query(udp::v4(), host, boost::lexical_cast<std::string>(port));
+        udp::resolver::query query(udp::v4(), host, 
+                                   boost::lexical_cast<std::string>(port));
         udp::endpoint endpoint = *resolver.resolve(query);
         socket_.connect(endpoint);
         check_deadline();
@@ -75,7 +75,8 @@ private:
             std::fill(data.begin(), data.end(), 0);
             receive(data);
     
-            if (!std::equal(std::begin(data), std::end(data), std::begin(spell))) {
+            if (!std::equal(std::begin(data), std::end(data), 
+                            std::begin(spell))) {
                 throw std::runtime_error("bus capture fail");
             } else {
                 break;
@@ -121,14 +122,17 @@ private:
         std::size_t length = 0;
 
         socket_.async_receive(boost::asio::buffer(buffer),
-                              boost::bind(&bus_impl::handle_receive, _1, _2, &ec, &length));
+                              boost::bind(&bus_impl::handle_receive, _1, _2,
+                                          &ec, &length));
 
         do io_service_.run_one(); while (ec == boost::asio::error::would_block);
         return length;
     }
 
-    static void handle_receive(const boost::system::error_code& ec, std::size_t length,
-                               boost::system::error_code* out_ec, std::size_t* out_length) {
+    static void handle_receive(const boost::system::error_code& ec, 
+                               std::size_t length,
+                               boost::system::error_code* out_ec, 
+                               std::size_t* out_length) {
         *out_ec = ec;
         *out_length = length;
     }
@@ -142,9 +146,14 @@ private:
 
 udp_bus::bus_impl::io_service udp_bus::bus_impl::io_service_;
 
-udp_bus::udp_bus(const std::string& host, unsigned short port) : pimpl_(new bus_impl(host, port)) {}
-udp_bus::value_type udp_bus::read(const address& addr) { return pimpl_->read(addr); }
-void udp_bus::write(const address& addr, value_type value) { pimpl_->write(addr, value); }
+udp_bus::udp_bus(const std::string& host, unsigned short port) 
+    : pimpl_(new bus_impl(host, port)) {}
+udp_bus::value_type udp_bus::read(const address& addr) { 
+    return pimpl_->read(addr); 
+}
+void udp_bus::write(const address& addr, value_type value) { 
+    pimpl_->write(addr, value); 
+}
 
-}} //namespace insys::bus
+}} //namespace brd::bus
 

@@ -1,5 +1,5 @@
-#ifndef INSYS_B101E1NGU_HPP
-#define INSYS_B101E1NGU_HPP
+#ifndef BRD_B101E1NGU_HPP
+#define BRD_B101E1NGU_HPP
 
 #include <stdexcept>
 
@@ -7,10 +7,11 @@
 
 #include "iboard.hpp"
 
-namespace insys { namespace board {
+namespace brd { namespace board {
 
 struct board_error : std::runtime_error {
-    board_error(const std::string& name, const std::string& what_arg) throw() : std::runtime_error("board " + name + ": " + what_arg) {}
+    board_error(const std::string& name, const std::string& what_arg) throw() 
+        : std::runtime_error("board " + name + ": " + what_arg) {}
 };
 
 struct b101e1ngu : iboard {
@@ -23,6 +24,6 @@ private:
     boost::shared_ptr<board_impl> pimpl_;
 };
 
-}} //namespace insys::board
+}} //namespace brd::board
 
-#endif //INSYS_B101E1NGU_HPP
+#endif //BRD_B101E1NGU_HPP

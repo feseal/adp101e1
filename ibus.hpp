@@ -1,22 +1,24 @@
-#ifndef INSYS_BUS_HPP
-#define INSYS_BUS_HPP
+#ifndef BRD_BUS_HPP
+#define BRD_BUS_HPP
 
 #include <stdexcept>
 #include <boost/shared_ptr.hpp>
 
 #include "bus_address.hpp"
 
-namespace insys { namespace bus {
+namespace brd { namespace bus {
 
 
 struct address;
 
 struct bus_error : std::runtime_error {
-    bus_error(const std::string& what_arg) throw() : std::runtime_error("bus: " + what_arg) {}
+    bus_error(const std::string& what_arg) throw() 
+        : std::runtime_error("bus: " + what_arg) {}
 };
 
 struct timeout_error : bus_error {
-    timeout_error(const std::string& what_arg) throw() : bus_error("timeout " + what_arg) {}
+    timeout_error(const std::string& what_arg) throw() 
+        : bus_error("timeout " + what_arg) {}
 };
 
 struct ibus {
@@ -41,6 +43,6 @@ struct ibus {
 
 typedef boost::shared_ptr<ibus> bus_ptr;
 
-}} //namespace insys::bus
+}} //namespace brd::bus
 
-#endif //INSYS_BUS_HPP
+#endif //BRD_BUS_HPP

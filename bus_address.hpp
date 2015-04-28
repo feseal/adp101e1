@@ -1,5 +1,5 @@
-#ifndef INSYS_BUS_ADDRESS_HPP
-#define INSYS_BUS_ADDRESS_HPP
+#ifndef BRD_BUS_ADDRESS_HPP
+#define BRD_BUS_ADDRESS_HPP
 
 #include <ostream>
 #include <string>
@@ -7,7 +7,7 @@
 #include <boost/operators.hpp>
 
 
-namespace insys { namespace bus {
+namespace brd { namespace bus {
 
 struct address : boost::incrementable<address>
                , boost::addable<address, uint32_t> {
@@ -40,10 +40,12 @@ private:
 };
 
 inline std::ostream& operator<< (std::ostream& os, const address& addr) {
-    os << std::hex << addr.type() << " " << addr.value() << " " << std::dec << addr.step();
+    os << std::hex << addr.type() << " " 
+       << addr.value() << " " 
+       << std::dec << addr.step();
     return os;
 }
 
-}} //namesapce insys::bus
+}} //namesapce brd::bus
 
-#endif //INSYS_BUS_ADDRESS_HPP
+#endif //BRD_BUS_ADDRESS_HPP

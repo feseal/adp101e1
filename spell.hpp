@@ -1,12 +1,12 @@
-#ifndef INSYS_SPELL_HPP
-#define INSYS_SPELL_HPP
+#ifndef BRD_SPELL_HPP
+#define BRD_SPELL_HPP
 
 #include <cstdint>
 
-namespace insys {
+namespace brd {
 
 extern const uint32_t spell[4];
 
-} //namespace insys
+} //namespace brd
 
-#endif //INSYS_SPELL
+#endif //BRD_SPELL

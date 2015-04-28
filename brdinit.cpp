@@ -26,7 +26,7 @@ int main(int argc, char* argv[]) {
             std::exit(EXIT_SUCCESS);
         }
     
-        insys::board::board_ptr board(new insys::board::b101e1ngu(argv[1]));
+        brd::board::board_ptr board(new brd::board::b101e1ngu(argv[1]));
         bool flashboot = argc < 3;
         board->reset(flashboot);
         if (!flashboot) {

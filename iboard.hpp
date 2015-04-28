@@ -1,10 +1,10 @@
-#ifndef INSYS_BOARD_HPP
-#define INSYS_BOARD_HPP
+#ifndef BRD_BOARD_HPP
+#define BRD_BOARD_HPP
 
 #include <string>
 #include <boost/shared_ptr.hpp>
 
-namespace insys { namespace board {
+namespace brd { namespace board {
 
 struct iboard {
     virtual void reset(bool flash_boot = false) = 0;
@@ -15,6 +15,6 @@ struct iboard {
 
 typedef boost::shared_ptr<iboard> board_ptr;
 
-}} //namespace insys::board
+}} //namespace brd::board
 
-#endif //INSYS_BOARD_HPP
+#endif //BRD_BOARD_HPP

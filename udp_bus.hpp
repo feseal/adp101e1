@@ -1,10 +1,10 @@
-#ifndef INSYS_UDP_BUS
-#define INSYS_UDP_BUS
+#ifndef BRD_UDP_BUS
+#define BRD_UDP_BUS
 
 #include <boost/smart_ptr.hpp>
 #include "ibus.hpp"
 
-namespace insys { namespace bus {
+namespace brd { namespace bus {
 
 struct udp_bus : ibus {
     explicit udp_bus(const std::string& host, unsigned short port = 3001);
@@ -16,6 +16,6 @@ private:
 };
 
 
-}} //namespace insys::bus
+}} //namespace brd::bus
 
-#endif //INSYS_UDP_BUS
+#endif //BRD_UDP_BUS
