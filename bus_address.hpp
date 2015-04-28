@@ -5,7 +5,7 @@
 #include <string>
 #include <sstream>
 #include <boost/operators.hpp>
-#include "int_types.hpp"
+
 
 namespace insys { namespace bus {
 

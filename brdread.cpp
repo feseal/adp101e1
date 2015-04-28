@@ -9,23 +9,22 @@
 #include <boost/asio.hpp>
 #include <boost/range.hpp>
 
+#include "spell.hpp"
+
 namespace impl {
 using boost::asio::ip::udp;
 
 void initialize_board_connection(udp::socket& sock, int try_count = 10) {
-    int mantra[] = { 0x13572468,
-                     0xaabbccdd,
-                     0xeeff0011,
-                     0x00ff33aa };
-
     bool ready = false;
     for (int i = 0; i < try_count; ++i) {
-        std::vector<int> data(boost::begin(mantra), boost::end(mantra));
+        std::vector<int> data(std::begin(insys::spell),
+                              std::end(insys::spell));
         sock.send(boost::asio::buffer(data));
         std::fill(data.begin(), data.end(), 0);
         sock.receive(boost::asio::buffer(data));
     
-        if (std::equal(boost::begin(data), boost::end(data), boost::begin(mantra))) {
+        if (std::equal(std::begin(data), std::end(data),
+                       std::begin(insys::spell))) {
             ready = true;
             break;
         }

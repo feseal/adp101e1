@@ -14,6 +14,7 @@ lib boost_program_options ;
 using gcc ;
 
 project : requirements
+          <cflags>-std=c++11
           <library>boost_system
           <library>boost_thread
           <library>boost_filesystem
@@ -22,8 +23,8 @@ project : requirements
           <variant>release
           <include>$(elfio-path) ;
 
-exe brdinit : brdinit.cpp udp_bus.cpp b101e1ngu.cpp boot_loader.cpp ;
+exe brdinit : brdinit.cpp udp_bus.cpp b101e1ngu.cpp boot_loader.cpp spell.cpp ;
 
-exe brdread : brdread.cpp ;
+exe brdread : brdread.cpp spell.cpp ;
 
 install dist : brdinit brdread : <location>$(prefix)/bin ;

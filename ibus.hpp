@@ -5,7 +5,6 @@
 #include <boost/shared_ptr.hpp>
 
 #include "bus_address.hpp"
-#include "int_types.hpp"
 
 namespace insys { namespace bus {
 

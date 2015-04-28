@@ -7,6 +7,7 @@
 #include <boost/range.hpp>
 
 #include "udp_bus.hpp"
+#include "spell.hpp"
 
 namespace insys { namespace bus {
 
@@ -68,18 +69,13 @@ struct udp_bus::bus_impl {
     }
 private:
     void capture() {
-        int mantra[] = { 0x13572468,
-                         0xaabbccdd,
-                         0xeeff0011,
-                         0x00ff33aa };
-
         for (int i = 0; i < 2; ++i) {
-            std::vector<int> data(boost::begin(mantra), boost::end(mantra));
+            std::vector<int> data(std::begin(spell), std::end(spell));
             send(boost::asio::buffer(data));
             std::fill(data.begin(), data.end(), 0);
             receive(data);
     
-            if (!std::equal(boost::begin(data), boost::end(data), boost::begin(mantra))) {
+            if (!std::equal(std::begin(data), std::end(data), std::begin(spell))) {
                 throw std::runtime_error("bus capture fail");
             } else {
                 break;
