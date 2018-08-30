@@ -1,5 +1,5 @@
 # adp101e1ngu
-Board [adp101e1ngu](http://insys.ru/products/dsp/adp101e1) communication software
+Board [adp101e1ngu](http://insys.ru/index.php/dsp/adp101e1) communication software
 
 # Installation
 
